@@ -2,8 +2,9 @@ name: E2E Test with Puppeteer
 
 on:
   push:
-    branches:
-      - feature/*
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
   workflow_dispatch:
 
