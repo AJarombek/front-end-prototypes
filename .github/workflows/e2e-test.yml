@@ -12,6 +12,12 @@ jobs:
   e2e-test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        directory:
+          - websockets
+          - sse
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -25,18 +31,13 @@ jobs:
         run: npm install -g yarn
 
       - name: Install Dependencies
-        working-directory: websockets
-        run: yarn
+        run: yarn --cwd ${{ matrix.directory }}
 
       - name: Start WebSocket Server
-        working-directory: websockets
-        run: node server.js &
+        run: node ${{ matrix.directory }}/server.js &
 
       - name: Wait for Server to Start
-        working-directory: websockets
         run: sleep 2
 
       - name: Run Puppeteer E2E Test
-        working-directory: websockets
-        run: node e2e-test.js
-
+        run: node ${{ matrix.directory }}/e2e-test.js

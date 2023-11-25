@@ -17,6 +17,13 @@ curl -X POST "http://localhost:8080/broadcast?message=Hello%20World"
 curl http://localhost:8080/status
 ```
 
+**Start the Server and Run the E2E Test**
+
+```bash
+node server.js &
+node e2e-test.js
+```
+
 ### Files
 
 | Filename       | Description                                                                        |
